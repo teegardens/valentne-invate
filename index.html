@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на День Святого Валентина</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fdf2f8 0%, #f9e8ed 100%);
+            font-family: 'Lora', serif;
+            color: #6b2c3f;
+            text-align: center;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .bg-shapes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-shapes::before,
+        .bg-shapes::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 70%, rgba(255, 182, 193, 0.18), transparent 60%);
+            animation: float 24s infinite ease-in-out;
+        }
+        .bg-shapes::before {
+            width: 450px;
+            height: 450px;
+            top: 10%;
+            left: -10%;
+        }
+        .bg-shapes::after {
+            width: 600px;
+            height: 600px;
+            bottom: -15%;
+            right: -20%;
+            animation-delay: -12s;
+            background: radial-gradient(circle at 70% 30%, rgba(242, 191, 206, 0.22), transparent 65%);
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50%      { transform: translate(60px, -50px) rotate(3deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 60px 40px;
+            max-width: 820px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(139, 92, 104, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            animation: fadeIn 1.8s ease-out;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.2em;
+            margin: 0 0 28px;
+            color: #a52a4e;
+            font-weight: 400;
+            letter-spacing: 1px;
+            display: inline-block;
+            animation: gentlePulse 3.2s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.05); }
+        }
+
+        h1:hover {
+            animation: gentlePulse 2s ease-in-out infinite, heartbeat 1.3s infinite;
+            color: #c1355e;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.06); }
+        }
+
+        p {
+            font-size: 1.28em;
+            margin-bottom: 28px;
+            line-height: 1.7;
+            color: #5d3f4a;
+            font-weight: 400;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 14px 36px;
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            color: white;
+            font-size: 1.15em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            min-width: 140px;
+        }
+        .button:hover {
+            background: rgba(255, 255, 255, 0.45);
+            transform: scale(1.12) translateY(-4px);
+            box-shadow: 0 16px 48px rgba(200, 85, 143, 0.35);
+        }
+        #yesButton { background: linear-gradient(135deg, #e07a9f, #c85a8f); }
+        #noButton  { background: linear-gradient(135deg, #a8a8a8, #8c8c8c); }
+
+        .heart {
+            position: absolute;
+            font-size: 1.9em;
+            color: transparent;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.7));
+            animation: fall 8s linear infinite, glowPulse 3s infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes fall {
+            0%   { transform: translateY(-120vh) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(120vh) rotate(1080deg); opacity: 0; }
+        }
+        @keyframes glowPulse {
+            from { filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.5)); }
+            to   { filter: drop-shadow(0 0 22px rgba(255, 105, 180, 1)); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: linear-gradient(145deg, #fffaf5, #fff0f5);
+            padding: 50px 40px;
+            border-radius: 28px;
+            max-width: 540px;
+            box-shadow: 0 20px 80px rgba(200, 85, 143, 0.4),
+                        inset 0 0 20px rgba(255, 255, 255, 0.6);
+            animation: scaleInGlow 0.7s ease-out;
+            position: relative;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            text-align: left;
+        }
+        @keyframes scaleInGlow {
+            from { transform: scale(0.75); opacity: 0; filter: blur(4px); }
+            to   { transform: scale(1);   opacity: 1; filter: blur(0);   }
+        }
+        .modal img {
+            max-width: 100%;
+            border-radius: 20px;
+            margin-bottom: 32px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .modal-content .intro {
+            text-align: center;
+            font-size: 1.65em;
+            margin-bottom: 36px;
+            color: #a52a4e;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .modal-content p {
+            font-size: 1.22em;
+            line-height: 1.8;
+            margin: 20px 0;
+            color: #5d3f4a;
+            padding-left: 14px;
+            font-weight: 400;
+        }
+        .modal-content .closing {
+            text-align: right;
+            font-size: 1.4em;
+            margin-top: 40px;
+            color: #c1355e;
+            font-weight: 500;
+            font-style: italic;
+        }
+        .modal .close {
+            position: absolute;
+            top: 18px;
+            right: 28px;
+            font-size: 2.4em;
+            color: #a52a4e;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .modal .close:hover {
+            color: #c1355e;
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 3.2em; margin-bottom: 20px; }
+            p { font-size: 1.1em; line-height: 1.6; margin-bottom: 20px; }
+            .container { padding: 50px 28px; border-radius: 24px; max-width: 90%; }
+            .buttons { gap: 20px; flex-direction: column; }
+            .button { padding: 16px 40px; font-size: 1.25em; min-width: 220px; }
+            .modal-content { padding: 40px 28px; max-width: 92%; }
+            .modal-content p { font-size: 1.1em; padding-left: 10px; }
+            .modal-content .intro { font-size: 1.45em; margin-bottom: 28px; }
+            .modal-content .closing { font-size: 1.3em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-shapes"></div>
+
+    <div class="container">
+        <h1>Дорогая Гулечка!</h1>
+        <p>В предверии Дня Святого Валентина я хочу напомнить, насколько ты для меня важна. Ты — свет в моей жизни, и я не могу представить день без тебя.</p>
+        <p>Ты будешь моей валентинкой?😥💕</p>
+      
+        <div class="buttons">
+            <button id="yesButton" class="button">Да! 😘</button>
+            <button id="noButton" class="button">Нет 😔</button>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <img src="https://files.catbox.moe/ujdmg1.jpg" alt="Я очень рад твоему выбору!">
+            <p class="intro">Я так рад твоему выбору!!! 
+	    <p>	Приглашаю тебя на романтический ужин <strong>14 февраля в 16:00</strong>. Мероприятие будет проходить в ресторане <strong>«Гаврош»</strong>.
+            	С тебя сиять так же ярко, как и каждый день! 💕
+	    </p>
+            <p class="closing">Жду встречи! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        }
+        setInterval(createHeart, 800);
+
+        const noButton = document.getElementById('noButton');
+        const container = document.querySelector('.container');
+
+        function moveNoButton() {
+            const containerRect = container.getBoundingClientRect();
+            const btnWidth = noButton.offsetWidth;
+            const btnHeight = noButton.offsetHeight;
+            const maxX = containerRect.width - btnWidth - 50;
+            const maxY = containerRect.height - btnHeight - 50;
+            const randomX = 25 + Math.random() * maxX;
+            const randomY = 25 + Math.random() * maxY;
+            noButton.style.position = 'absolute';
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+            noButton.style.transition = 'left 0.45s ease-out, top 0.45s ease-out';
+        }
+
+        noButton.addEventListener('mouseover', moveNoButton);
+        noButton.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            moveNoButton();
+        });
+        noButton.addEventListener('click', function(e) {
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                e.preventDefault();
+                moveNoButton();
+            }
+        });
+
+        const yesButton = document.getElementById('yesButton');
+        const modal = document.getElementById('modal');
+        yesButton.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            createConfetti();
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) closeModal();
+        });
+
+        function createConfetti() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            for (let i = 0; i < 60; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'heart';
+                confetti.innerHTML = ['❤️','💕','💖','💗','✨'][Math.floor(Math.random()*5)];
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 80 + Math.random() * 180;
+                confetti.style.left = (centerX + Math.cos(angle) * distance) + 'px';
+                confetti.style.top  = (centerY + Math.sin(angle) * distance) + 'px';
+                confetti.style.animation = 'fall 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
